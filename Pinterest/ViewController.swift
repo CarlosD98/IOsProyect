@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Firebase
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -22,18 +22,18 @@ class ViewController: UIViewController {
         
         nameTextf.topAnchor.constraint(equalTo: inputContainerV.topAnchor).isActive = true
         nameTextf.heightAnchor.constraint(equalTo: inputContainerV.heightAnchor, multiplier: 1/3).isActive = true
-        nameTextf.widthAnchor.constraint(equalTo: inputContainerV.widthAnchor).isActive = true
-        nameTextf.leftAnchor.constraint(equalTo: inputContainerV.leftAnchor).isActive = true
+        nameTextf.widthAnchor.constraint(equalTo: inputContainerV.widthAnchor, constant : -30).isActive = true
+        nameTextf.leftAnchor.constraint(equalTo: inputContainerV.leftAnchor, constant: 15).isActive = true
         
         Mailtf.topAnchor.constraint(equalTo: nameTextf.bottomAnchor).isActive = true
         Mailtf.heightAnchor.constraint(equalTo: inputContainerV.heightAnchor, multiplier: 1/3).isActive = true
-        Mailtf.widthAnchor.constraint(equalTo: inputContainerV.widthAnchor).isActive = true
-        Mailtf.leftAnchor.constraint(equalTo: inputContainerV.leftAnchor).isActive = true
+        Mailtf.widthAnchor.constraint(equalTo: inputContainerV.widthAnchor, constant: -30).isActive = true
+        Mailtf.leftAnchor.constraint(equalTo: inputContainerV.leftAnchor, constant: 15 ).isActive = true
         
         PassWordTF.topAnchor.constraint(equalTo: Mailtf.bottomAnchor).isActive = true
         PassWordTF.heightAnchor.constraint(equalTo: inputContainerV.heightAnchor, multiplier: 1/3).isActive = true
-        PassWordTF.widthAnchor.constraint(equalTo: inputContainerV.widthAnchor).isActive = true
-        PassWordTF.leftAnchor.constraint(equalTo: inputContainerV.leftAnchor).isActive = true
+        PassWordTF.widthAnchor.constraint(equalTo: inputContainerV.widthAnchor, constant: -30).isActive = true
+        PassWordTF.leftAnchor.constraint(equalTo: inputContainerV.leftAnchor, constant: 15).isActive = true
         
         inputContainerV.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         inputContainerV.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -89,9 +89,30 @@ class ViewController: UIViewController {
     }()
     
     @objc func handleButton (){
-        let N : String? = nameTextf.text
-        let pass : String? = PassWordTF.text
-        let mail :String? = Mailtf.text
+       if  let N  = nameTextf.text,let pass  = PassWordTF.text, let mail  = Mailtf.text{
+        print(mail)
+        print(pass)
+        
+        Auth.auth().createUser( withEmail: mail, password: pass) { (data:AuthDataResult?,error) in
+            if error != nil{
+                print (error)}
+            let user = data?.user
+            if let uid = user?.uid{
+                let db = Database.database().reference(fromURL: "https://pinterest-e52be.firebaseio.com/")
+                let UserRef = db.child("users").child(uid)
+                UserRef.updateChildValues(["name":N, "Mail": mail, "Password": pass])
+                let MessageRef = db.child("messages").child(uid)
+                MessageRef.updateChildValues(["user":N, "messages":"Hey dummy here"])
+                let ref = db.child("users").child(uid)
+                ref.removeValue{ error, _ in
+                    print(error)
+                    
+                }
+            }
+        }
+        }
+        
+        
     }
     
 }
