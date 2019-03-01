@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -89,31 +90,39 @@ class ViewController: UIViewController {
     }()
     
     @objc func handleButton (){
-       if  let N  = nameTextf.text,let pass  = PassWordTF.text, let mail  = Mailtf.text{
-        print(mail)
-        print(pass)
+        guard  let name = nameTextf.text,let pass  = PassWordTF.text, let mail  = Mailtf.text else {
+            print("Not Valid")
+            return
+        }
         
-        Auth.auth().createUser( withEmail: mail, password: pass) { (data:AuthDataResult?,error) in
+        
+        Auth.auth().createUser(withEmail: mail, password: pass) { (data:AuthDataResult?,error) in
+            var user = data?.user
             if error != nil{
-                print (error)}
-            let user = data?.user
-            if let uid = user?.uid{
-                let db = Database.database().reference(fromURL: "https://pinterest-e52be.firebaseio.com/")
-                let UserRef = db.child("users").child(uid)
-                UserRef.updateChildValues(["name":N, "Mail": mail, "Password": pass])
-                let MessageRef = db.child("messages").child(uid)
-                MessageRef.updateChildValues(["user":N, "messages":"Hey dummy here"])
-                let ref = db.child("users").child(uid)
-                ref.removeValue{ error, _ in
+                print (error)
+                return
+            }
+            guard let uid = user?.uid else {
+                return
+            }
+            
+            var ref = Database.database().reference(fromURL: "https://pinterest-e52be.firebaseio.com/")
+            let values = ["name": name, "emali": mail, "msg": "Dummy"]
+            let usersRef = ref.child("users").child(uid)
+            usersRef.updateChildValues(values, withCompletionBlock: { (error, databaseRef:DatabaseReference?) in
+                if  error != nil {
                     print(error)
-                    
                 }
+                
+                    
+                })
+            print ("Save Successful")
             }
         }
-        }
+        
         
         
     }
     
-}
+
 
