@@ -13,111 +13,87 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(red:255/255, green:255/255, blue:255/255, alpha:1)
+
         // Do any additional setup after loading the view, typically from a nib.
+        view.addSubview(logo)
+        view.addSubview(ButtonMail)
+        view.addSubview(ButtonFace)
+        view.addSubview(ButtonGoo)
+        view.addSubview(ButtonSN)
         
-        view.backgroundColor = UIColor(red: 61/255, green: 91/255, blue: 151/255, alpha: 1)
-        view.addSubview(inputContainerV)
-        inputContainerV.addSubview(nameTextf)
-        inputContainerV.addSubview(Mailtf)
-        inputContainerV.addSubview(PassWordTF)
+        ButtonMail.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 50).isActive = true
+        ButtonFace.topAnchor.constraint(equalTo: ButtonMail.bottomAnchor, constant: 10 ).isActive = true
+        ButtonGoo.topAnchor.constraint(equalTo: ButtonFace.bottomAnchor, constant: 10).isActive = true
+        ButtonSN.topAnchor.constraint(equalTo: ButtonGoo.bottomAnchor, constant: 30 ).isActive = true
         
-        nameTextf.topAnchor.constraint(equalTo: inputContainerV.topAnchor).isActive = true
-        nameTextf.heightAnchor.constraint(equalTo: inputContainerV.heightAnchor, multiplier: 1/3).isActive = true
-        nameTextf.widthAnchor.constraint(equalTo: inputContainerV.widthAnchor, constant : -30).isActive = true
-        nameTextf.leftAnchor.constraint(equalTo: inputContainerV.leftAnchor, constant: 15).isActive = true
+        ButtonMail.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        ButtonFace.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        ButtonGoo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        ButtonSN.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        Mailtf.topAnchor.constraint(equalTo: nameTextf.bottomAnchor).isActive = true
-        Mailtf.heightAnchor.constraint(equalTo: inputContainerV.heightAnchor, multiplier: 1/3).isActive = true
-        Mailtf.widthAnchor.constraint(equalTo: inputContainerV.widthAnchor, constant: -30).isActive = true
-        Mailtf.leftAnchor.constraint(equalTo: inputContainerV.leftAnchor, constant: 15 ).isActive = true
+        ButtonMail.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
+        ButtonFace.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
+        ButtonGoo.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
+        ButtonSN.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
         
-        PassWordTF.topAnchor.constraint(equalTo: Mailtf.bottomAnchor).isActive = true
-        PassWordTF.heightAnchor.constraint(equalTo: inputContainerV.heightAnchor, multiplier: 1/3).isActive = true
-        PassWordTF.widthAnchor.constraint(equalTo: inputContainerV.widthAnchor, constant: -30).isActive = true
-        PassWordTF.leftAnchor.constraint(equalTo: inputContainerV.leftAnchor, constant: 15).isActive = true
-        
-        inputContainerV.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        inputContainerV.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        inputContainerV.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        inputContainerV.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -30).isActive = true
-        
+        ButtonMail.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        ButtonFace.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        ButtonGoo.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        ButtonSN.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         
-        view.addSubview(fButton)
-        fButton.topAnchor.constraint(equalTo: inputContainerV.bottomAnchor, constant: 20).isActive = true
-        fButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        fButton.leftAnchor.constraint(equalTo: inputContainerV.leftAnchor).isActive = true
-        fButton.rightAnchor.constraint(equalTo: inputContainerV.rightAnchor).isActive = true
+        
     }
-    let nameTextf : UITextField = {
-       let tf = UITextField()
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.placeholder = "Name"
-        tf.backgroundColor = .white
-        return tf
-    }()
-    let Mailtf : UITextField = {
-        let tf = UITextField()
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.placeholder = "Email"
-        tf.backgroundColor = .white
-        return tf
-    }()
-    let PassWordTF : UITextField = {
-        let tf = UITextField()
-        tf.isSecureTextEntry = true
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.placeholder = "Password"
-        tf.backgroundColor = .white
-        return tf
+    let logo : UIImageView = {
+        let lg = UIImageView(frame: CGRect(x: 105, y: 150, width: 200, height: 200))
+        lg.image = UIImage(named: "pinterestL.png")
+        return lg
         
     }()
-    
-    let inputContainerV: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 6
-        view.backgroundColor = .white
-        return view
-    }()
-    let fButton: UIButton = {
+   
+    let ButtonMail: UIButton = {
         let ub = UIButton()
-        ub.backgroundColor = UIColor(red: 81/255, green: 101/255, blue: 161/255, alpha: 1)
-        ub.setTitle("Register", for: .normal)
+        ub.backgroundColor = UIColor(red: 189/255, green: 8/255, blue: 28/255, alpha: 1)
+        ub.setTitle("Register with email", for: .normal)
+        ub.translatesAutoresizingMaskIntoConstraints = false
+        ub.addTarget(self, action: #selector(handleButton), for: .touchUpInside)
+        return ub
+    }()
+    let ButtonFace: UIButton = {
+        let ub = UIButton()
+        ub.backgroundColor = UIColor(red: 59/255, green: 89/255, blue: 152/255, alpha: 1)
+        ub.setTitle("Register with Facebook", for: .normal)
+        ub.translatesAutoresizingMaskIntoConstraints = false
+        ub.addTarget(self, action: #selector(handleButton), for: .touchUpInside)
+        return ub
+    }()
+    let ButtonGoo: UIButton = {
+        let ub = UIButton()
+        ub.backgroundColor = UIColor(red: 63/255, green: 133/255, blue: 244/255, alpha: 1)
+        ub.setTitle("Register with Google", for: .normal)
+        ub.translatesAutoresizingMaskIntoConstraints = false
+        ub.addTarget(self, action: #selector(handleButton), for: .touchUpInside)
+        return ub
+    }()
+    let ButtonSN: UIButton = {
+        let ub = UIButton()
+        ub.backgroundColor = UIColor(red: 241/255 ,green: 241/255, blue: 241/255, alpha: 1)
+        ub.setTitle("Sign in", for: .normal)
+        ub.setTitleColor(UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha:1), for: .normal)
         ub.translatesAutoresizingMaskIntoConstraints = false
         ub.addTarget(self, action: #selector(handleButton), for: .touchUpInside)
         return ub
     }()
     
-    @objc func handleButton (){
-        guard  let name = nameTextf.text,let pass  = PassWordTF.text, let mail  = Mailtf.text else {
-            print("Not Valid")
-            return
+    
+    @objc func handleButton (_ sender:UIButton){
+        
+        if sender == ButtonMail{
+            let register = RegisterController()
+            self.navigationController?.pushViewController(register, animated: true)
         }
         
-        
-        Auth.auth().createUser(withEmail: mail, password: pass) { (data:AuthDataResult?,error) in
-            var user = data?.user
-            if error != nil{
-                print (error)
-                return
-            }
-            guard let uid = user?.uid else {
-                return
-            }
-            
-            var ref = Database.database().reference(fromURL: "https://pinterest-e52be.firebaseio.com/")
-            let values = ["name": name, "emali": mail, "msg": "Dummy"]
-            let usersRef = ref.child("users").child(uid)
-            usersRef.updateChildValues(values, withCompletionBlock: { (error, databaseRef:DatabaseReference?) in
-                if  error != nil {
-                    print(error)
-                }
-                
-                    
-                })
-            print ("Save Successful")
-            }
         }
         
         
