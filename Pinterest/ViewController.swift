@@ -91,6 +91,7 @@ class ViewController: UIViewController {
         
         if sender == ButtonMail{
             let register = RegisterController()
+            register.nav = .mail
             self.navigationController?.pushViewController(register, animated: true)
         }
         
