@@ -89,10 +89,15 @@ class ViewController: UIViewController {
     
     @objc func handleButton (_ sender:UIButton){
         
-        if sender == ButtonMail{
+        switch sender {
+        case ButtonMail:
             let register = RegisterController()
             register.nav = .mail
             self.navigationController?.pushViewController(register, animated: true)
+        case ButtonSN:
+            let SN = LogIn ()
+            self.navigationController?.pushViewController(SN, animated: true)
+        default: 1+2
         }
         
         }
