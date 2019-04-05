@@ -15,6 +15,7 @@
 		F334D326223B43AE000B916B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F334D325223B43AE000B916B /* User.swift */; };
 		F39D29F92228C21C0020DC31 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D29F82228C21C0020DC31 /* RegisterController.swift */; };
 		F39D29FC2228DC030020DC31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F39D29FB2228C9650020DC31 /* GoogleService-Info.plist */; };
+		F3A94C632256D7B300E3A6F8 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A94C622256D7B300E3A6F8 /* CollectionView.swift */; };
 		FB08EB922203D33D003E46A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB08EB912203D33D003E46A2 /* AppDelegate.swift */; };
 		FB08EB942203D33D003E46A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB08EB932203D33D003E46A2 /* ViewController.swift */; };
 		FB08EB972203D33D003E46A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB08EB952203D33D003E46A2 /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 		F334D325223B43AE000B916B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F39D29F82228C21C0020DC31 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		F39D29FB2228C9650020DC31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F3A94C622256D7B300E3A6F8 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		FB08EB8E2203D33D003E46A2 /* Pinterest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pinterest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB08EB912203D33D003E46A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB08EB932203D33D003E46A2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				F39D29F82228C21C0020DC31 /* RegisterController.swift */,
 				F334D323223B3831000B916B /* MainPage.swift */,
 				F334D325223B43AE000B916B /* User.swift */,
+				F3A94C622256D7B300E3A6F8 /* CollectionView.swift */,
 			);
 			path = Pinterest;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3A94C632256D7B300E3A6F8 /* CollectionView.swift in Sources */,
 				FB08EB942203D33D003E46A2 /* ViewController.swift in Sources */,
 				FB08EB922203D33D003E46A2 /* AppDelegate.swift in Sources */,
 				F39D29F92228C21C0020DC31 /* RegisterController.swift in Sources */,
