@@ -2,109 +2,231 @@
 //  ViewController.swift
 //  Pinterest
 //
-//  Created by Alumno on 31/01/19.
-//  Copyright © 2019 Alumno. All rights reserved.
+//  Created by Juan Cabral on 1/31/19.
+//  Copyright © 2019 Juan Cabral. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red:255/255, green:255/255, blue:255/255, alpha:1)
-
-        // Do any additional setup after loading the view, typically from a nib.
-        view.addSubview(logo)
-        view.addSubview(ButtonMail)
-        view.addSubview(ButtonFace)
-        view.addSubview(ButtonGoo)
-        view.addSubview(ButtonSN)
-        
-        ButtonMail.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 50).isActive = true
-        ButtonFace.topAnchor.constraint(equalTo: ButtonMail.bottomAnchor, constant: 10 ).isActive = true
-        ButtonGoo.topAnchor.constraint(equalTo: ButtonFace.bottomAnchor, constant: 10).isActive = true
-        ButtonSN.topAnchor.constraint(equalTo: ButtonGoo.bottomAnchor, constant: 30 ).isActive = true
-        
-        ButtonMail.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        ButtonFace.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        ButtonGoo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        ButtonSN.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
-        ButtonMail.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
-        ButtonFace.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
-        ButtonGoo.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
-        ButtonSN.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
-        
-        ButtonMail.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        ButtonFace.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        ButtonGoo.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        ButtonSN.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         
+        view.backgroundColor = .white
         
-    }
-    let logo : UIImageView = {
-        let lg = UIImageView(frame: CGRect(x: 105, y: 150, width: 200, height: 200))
-        lg.image = UIImage(named: "pinterestL.png")
-        return lg
-        
-    }()
-   
-    let ButtonMail: UIButton = {
-        let ub = UIButton()
-        ub.backgroundColor = UIColor(red: 189/255, green: 8/255, blue: 28/255, alpha: 1)
-        ub.setTitle("Register with email", for: .normal)
-        ub.translatesAutoresizingMaskIntoConstraints = false
-        ub.addTarget(self, action: #selector(handleButton), for: .touchUpInside)
-        return ub
-    }()
-    let ButtonFace: UIButton = {
-        let ub = UIButton()
-        ub.backgroundColor = UIColor(red: 59/255, green: 89/255, blue: 152/255, alpha: 1)
-        ub.setTitle("Register with Facebook", for: .normal)
-        ub.translatesAutoresizingMaskIntoConstraints = false
-        ub.addTarget(self, action: #selector(handleButton), for: .touchUpInside)
-        return ub
-    }()
-    let ButtonGoo: UIButton = {
-        let ub = UIButton()
-        ub.backgroundColor = UIColor(red: 63/255, green: 133/255, blue: 244/255, alpha: 1)
-        ub.setTitle("Register with Google", for: .normal)
-        ub.translatesAutoresizingMaskIntoConstraints = false
-        ub.addTarget(self, action: #selector(handleButton), for: .touchUpInside)
-        return ub
-    }()
-    let ButtonSN: UIButton = {
-        let ub = UIButton()
-        ub.backgroundColor = UIColor(red: 241/255 ,green: 241/255, blue: 241/255, alpha: 1)
-        ub.setTitle("Sign in", for: .normal)
-        ub.setTitleColor(UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha:1), for: .normal)
-        ub.translatesAutoresizingMaskIntoConstraints = false
-        ub.addTarget(self, action: #selector(handleButton), for: .touchUpInside)
-        return ub
-    }()
+        view.addSubview(backgroundImage)
+        view.addSubview(profileImageView)
     
-    
-    @objc func handleButton (_ sender:UIButton){
-        
-        switch sender {
-        case ButtonMail:
-            let register = RegisterController()
-            register.nav = .mail
-            self.navigationController?.pushViewController(register, animated: true)
-        case ButtonSN:
-            let SN = LogIn ()
-            self.navigationController?.pushViewController(SN, animated: true)
-        default: 1+2
-        }
-        
-        }
         
         
+        //constraints
+        // constraints for input
         
+        profileImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
+        profileImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/5).isActive = true
+        profileImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1/8).isActive = true
+        profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        backgroundImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
+        backgroundImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 3/5).isActive = true
+        backgroundImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 7/8).isActive = true
+        backgroundImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        let maskedView = UIView(frame: CGRect(x: 0, y: view.bounds.width/2 + 200, width: view.bounds.width, height: 256))
+        //let maskedView = UIView()
+        maskedView.backgroundColor = .white
+        
+        let gradientMaskLayer = CAGradientLayer()
+        gradientMaskLayer.frame = maskedView.bounds
+        
+        gradientMaskLayer.colors = [UIColor.clear.cgColor, UIColor.white.cgColor, UIColor.white.cgColor, UIColor.clear.cgColor]
+        gradientMaskLayer.locations = [0, 0.1, 0.9, 1]
+        maskedView.layer.mask = gradientMaskLayer
+        view.addSubview(maskedView)
+        
+        view.addSubview(firstButton)
+        view.addSubview(secondButton)
+        view.addSubview(thirdButton)
+        view.addSubview(initButton)
+        
+        
+        firstButton.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 100).isActive = true
+        firstButton.heightAnchor.constraint(equalToConstant: 53).isActive = true
+        firstButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -30).isActive = true
+        firstButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        secondButton.topAnchor.constraint(equalTo: firstButton.bottomAnchor, constant: 5).isActive = true
+        secondButton.heightAnchor.constraint(equalTo: firstButton.heightAnchor).isActive = true
+        secondButton.leftAnchor.constraint(equalTo: firstButton.leftAnchor).isActive = true
+        secondButton.rightAnchor.constraint(equalTo: firstButton.rightAnchor).isActive = true
+        
+        thirdButton.topAnchor.constraint(equalTo: secondButton.bottomAnchor, constant: 5).isActive = true
+        thirdButton.heightAnchor.constraint(equalTo: firstButton.heightAnchor).isActive = true
+        thirdButton.leftAnchor.constraint(equalTo: firstButton.leftAnchor).isActive = true
+        thirdButton.rightAnchor.constraint(equalTo: firstButton.rightAnchor).isActive = true
+        
+        initButton.topAnchor.constraint(equalTo: thirdButton.bottomAnchor, constant: 60).isActive = true
+        initButton.heightAnchor.constraint(equalTo: firstButton.heightAnchor).isActive = true
+        initButton.leftAnchor.constraint(equalTo: firstButton.leftAnchor).isActive = true
+        initButton.rightAnchor.constraint(equalTo: firstButton.rightAnchor).isActive = true
     }
     
+    
+    let backgroundImage : UIImageView = {
+        let iv = UIImageView()
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFill
+        let image = UIImage(named: "login_background")
+        iv.image = image
+        iv.alpha = 0.8
+        return iv
+    }()
+    
+    let profileImageView : UIImageView = {
+        let iv = UIImageView()
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFill
+        let image = UIImage(named: "pinterest")
+        iv.image = image
+        iv.image = iv.image!.withRenderingMode(.alwaysTemplate)
+        iv.tintColor = .red
+        
+        return iv
+    }()
+    
+    let emailTextField : UITextField = {
+        let tf = UITextField()
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        tf.placeholder = "Email"
+        tf.backgroundColor = .white
+        return tf
+    }()
+    
+    let passwordTextField : UITextField = {
+        let tf = UITextField()
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        tf.placeholder = "Password"
+        tf.backgroundColor = .white
+        tf.isSecureTextEntry = true
+        return tf
+    }()
+    
+    let nameTextField : UITextField = {
+        let tf = UITextField()
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        tf.placeholder = "Name"
+        tf.backgroundColor = .white
+        return tf
+    }()
+    
+    let inputContainerView : UIView =  {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 5
+        view.layer.masksToBounds = true
+        return view
+    }()
+    
+    lazy var firstButton : UIButton = {
+       let ub = UIButton()
+        ub.backgroundColor = .red
+        ub.setTitle("Continuar con el correo electrónico", for: .normal)
+        ub.translatesAutoresizingMaskIntoConstraints = false
+        ub.layer.cornerRadius = 10
+        ub.layer.masksToBounds = true
+        ub.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        ub.addTarget(self, action: #selector(handleButton2), for: .touchUpInside)
+        return ub
+    }()
+    
+    lazy var secondButton : UIButton = {
+        let ub = UIButton()
+        ub.backgroundColor = UIColor(red: 80/255, green: 101/255, blue: 161/255, alpha: 1)/*UIColor(red: 80/255, green: 101/255, blue: 161/255, alpha: 1)*/
+        ub.setTitle("Continuar con Facebook", for: .normal)
+        ub.translatesAutoresizingMaskIntoConstraints = false
+        ub.layer.cornerRadius = 10
+        ub.layer.masksToBounds = true
+        ub.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        ub.addTarget(self, action: #selector(handleButton2), for: .touchUpInside)
+        return ub
+    }()
+    
+    lazy var thirdButton : UIButton = {
+        let ub = UIButton()
+        ub.backgroundColor = .blue/*UIColor(red: 80/255, green: 101/255, blue: 161/255, alpha: 1)*/
+        ub.setTitle("Continuar con Google", for: .normal)
+        ub.translatesAutoresizingMaskIntoConstraints = false
+        ub.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        ub.layer.cornerRadius = 10
+        ub.layer.masksToBounds = true
+        ub.addTarget(self, action: #selector(handleButton2), for: .touchUpInside)
+        return ub
+    }()
+    
+    lazy var initButton : UIButton = {
+        let ub = UIButton()
+        ub.backgroundColor = .lightGray /*UIColor(red: 80/255, green: 101/255, blue: 161/255, alpha: 1)*/
+        ub.setTitle("Continuar con Google", for: .normal)
+        ub.translatesAutoresizingMaskIntoConstraints = false
+        ub.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        ub.layer.cornerRadius = 10
+        ub.layer.masksToBounds = true
+        ub.addTarget(self, action: #selector(handleButton2), for: .touchUpInside)
+        return ub
+    }()
+    
+    @objc func handleButton2(){
+        var email = EmailLoginController()
+        //var user = User()
+        email.message = "¿Cuál es tu correo electrónico?"
+        email.placeholder = "Correo"
+        //email.user = user
+        email.loginType = .mail
+        self.navigationController?.pushViewController(email, animated: true)
+    }
+
+    @objc func handleButton(){
+        guard let email = emailTextField.text, let password = passwordTextField.text, let name = nameTextField.text else {
+            print("Not valid")
+            return
+        }
+        Auth.auth().createUser(withEmail: email, password: password) { (user:User?, error) in
+            if error != nil {
+                print(error)
+                return
+            }
+            
+            guard let uid = user?.uid else {
+                return
+            }
+            
+            //sucessfully
+            var ref = Database.database().reference(fromURL: "https://pinterest-7574e.firebaseio.com/")
+            let values = ["name" :name, "email": email]
+            let usersRef = ref.child("users").child(uid)
+            usersRef.updateChildValues(values, withCompletionBlock: { (error, databaseRef:DatabaseReference?) in
+                if  error != nil {
+                    print(error)
+                }
+            })
+            
+            // successfully included
+            print("Saved user successfully into our database")
+            
+        }
+    }
+
+}
 
 
+extension UIColor {
+    
+    convenience init(r:CGFloat, g: CGFloat, b: CGFloat) {
+        self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
+    }
+    
+}
